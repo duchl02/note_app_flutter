@@ -86,9 +86,12 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                   ),
                 ),
               ),
-              Text(
-                'Cập nhật lần cuối : ${widget.note?.updateAt.toString()}',
-                style: theme.textTheme.bodyMedium,
+              Visibility(
+                visible: widget.note?.updateAt != null,
+                child: Text(
+                  'Cập nhật lần cuối : ${widget.note?.updateAt.toString()}',
+                  style: theme.textTheme.bodyMedium,
+                ),
               )
             ],
           ),
