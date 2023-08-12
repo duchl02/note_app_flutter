@@ -12,7 +12,8 @@ class _ListNoteScreenState extends State<ListNoteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("List Note Screen")),
-        body: const ReorderableNote());
+      appBar: AppBar(title: const Text("Ghi Chú")),
+      body: const ReorderableNote(),
+    );
   }
 }

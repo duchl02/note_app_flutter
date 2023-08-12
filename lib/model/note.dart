@@ -1,19 +1,19 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
-part 'note.freezed.dart';
 part 'note.g.dart';
 
-@freezed
-@HiveType(typeId: 0)
-class Note with _$Note {
-  const factory Note({
-    @HiveField(0) int? id,
-    @HiveField(1) String? title,
-    @HiveField(2) String? body,
-    @HiveField(3) DateTime? updateAt,
-    @HiveField(4) DateTime? createAt,
-  }) = _Note;
+@HiveType(typeId: 1)
+class Note extends HiveObject {
+  @HiveField(0)
+  String? id;
+  @HiveField(1)
+  String? title;
+  @HiveField(2)
+  String? body;
+  @HiveField(3)
+  DateTime? updateAt;
+  @HiveField(4)
+  late DateTime? createAt;
 
-  factory Note.fromJson(Map<String, dynamic> json) => _$NoteFromJson(json);
+  Note({this.id, this.body, this.createAt, this.title, this.updateAt});
 }

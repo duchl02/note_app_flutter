@@ -8,7 +8,7 @@ part of 'note.dart';
 
 class NoteAdapter extends TypeAdapter<Note> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
   Note read(BinaryReader reader) {
@@ -16,12 +16,29 @@ class NoteAdapter extends TypeAdapter<Note> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Note();
+    return Note(
+      id: fields[0] as String?,
+      body: fields[2] as String?,
+      createAt: fields[4] as DateTime?,
+      title: fields[1] as String?,
+      updateAt: fields[3] as DateTime?,
+    );
   }
 
   @override
   void write(BinaryWriter writer, Note obj) {
-    writer.writeByte(0);
+    writer
+      ..writeByte(5)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.title)
+      ..writeByte(2)
+      ..write(obj.body)
+      ..writeByte(3)
+      ..write(obj.updateAt)
+      ..writeByte(4)
+      ..write(obj.createAt);
   }
 
   @override
@@ -34,27 +51,3 @@ class NoteAdapter extends TypeAdapter<Note> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
-
-// **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
-
-_$_Note _$$_NoteFromJson(Map<String, dynamic> json) => _$_Note(
-      id: json['id'] as int?,
-      title: json['title'] as String?,
-      body: json['body'] as String?,
-      updateAt: json['updateAt'] == null
-          ? null
-          : DateTime.parse(json['updateAt'] as String),
-      createAt: json['createAt'] == null
-          ? null
-          : DateTime.parse(json['createAt'] as String),
-    );
-
-Map<String, dynamic> _$$_NoteToJson(_$_Note instance) => <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'body': instance.body,
-      'updateAt': instance.updateAt?.toIso8601String(),
-      'createAt': instance.createAt?.toIso8601String(),
-    };

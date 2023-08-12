@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/init_app.dart';
 import 'package:note_app/routers/app_routes.dart';
 import 'package:note_app/screen/list_note_screen.dart';
 import 'package:note_app/style/text_theme.dart';
 
+import 'storage/note_local_storage_helper.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  AppInitializer().initHive();
-
+  await NoteLocalStorageHelper().initLocalStorageHelper();
   runApp(const MyApp());
 }
 
